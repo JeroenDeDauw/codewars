@@ -1,6 +1,8 @@
 'use strict';
 
-Array.prototype.splice = function (from, count, insertItems) {
+// http://www.codewars.com/dojo/katas/52c82f219e8eaab84700025f/train/javascript
+
+Array.prototype.splice = function (from, count) {
 	function getArrayKeys(a) {
 		var keys = [];
 
@@ -12,25 +14,35 @@ Array.prototype.splice = function (from, count, insertItems) {
 	}
 
 	var keys = getArrayKeys(this);
-	var removedValues = [];
-	var valuesToReAdd = [];
+	var poppedValues = [];
 
 	for(var keyPosition in keys) {
 		if (keyPosition < from) {
 			continue;
 		}
 
-		var value = this[keys[keyPosition]];
-
-		if (keyPosition < from + count) {
-			removedValues.push(value);
-		}
-		else {
-			valuesToReAdd.push(value);
-		}
+		poppedValues.push(this.pop());
 	}
 
-	return [42];
+	var removedValues = [];
+
+	for (var i = count ; i > 0 ; i-- ) {
+		removedValues.unshift(poppedValues.shift());
+	}
+
+	var args = Array.prototype.slice.call(arguments);
+	args.shift();
+	args.shift();
+
+	for (var n in args) {
+		this.push(args[n]);
+	}
+
+	for (var x in poppedValues) {
+		this.unshift(poppedValues[x]);
+	}
+
+	return removedValues;
 };
 
 
