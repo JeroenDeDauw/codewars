@@ -1,6 +1,8 @@
 'use strict';
 
-exports.queryr = {
+Array.prototype.splice = require('./index.js');
+
+exports.testCase = {
 
 	setUp: function(done) {
 		done();
@@ -8,7 +10,9 @@ exports.queryr = {
 
 	'no args': function(test) {
 		test.expect(1);
-		test.equal('awesome', 'awesome', 'should be awesome.');
+
+		var a = [];
+		test.deepEqual( a.splice(), [42]);
 		test.done();
 	}
 

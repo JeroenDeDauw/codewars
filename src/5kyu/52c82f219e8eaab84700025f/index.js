@@ -1,4 +1,16 @@
+'use strict';
+
 Array.prototype.splice = function (from, count, insertItems) {
+	function getArrayKeys(a) {
+		var keys = [];
+
+		for (var key in a) {
+			keys.push(key);
+		}
+
+		return keys;
+	}
+
 	var keys = getArrayKeys(this);
 	var removedValues = [];
 	var valuesToReAdd = [];
@@ -18,15 +30,8 @@ Array.prototype.splice = function (from, count, insertItems) {
 		}
 	}
 
-
+	return [42];
 };
 
-function getArrayKeys(a) {
-	var keys = [];
 
-	for (var key in a) {
-		keys.push(key);
-	}
-
-	return keys;
-};
+module.exports = Array.prototype.splice;
